@@ -1,16 +1,27 @@
 package com.example;
 
+import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/hello")
 public class GreetingResource {
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String hello() {
-        return "Hello from RESTEasy Reactive";
+
+        //Greeting greeting = Integernal.builder()
+        //    .message("Hello from RESTEasy Reactive")
+        //    .build();
+
+        Greeting greeting = new GreetingInternalBuilder()
+            .message("Hello from RESTEasy Reactive")
+            .build();
+
+        return JsonbBuilder.create().toJson(greeting);
     }
 }
