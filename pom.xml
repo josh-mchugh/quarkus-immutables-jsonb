@@ -41,21 +41,9 @@
       <artifactId>quarkus-resteasy-reactive</artifactId>
     </dependency>
     <dependency>
-    <groupId>jakarta.platform</groupId>
-      <artifactId>jakarta.jakartaee-api</artifactId>
-      <version>8.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.immutables</groupId>
       <artifactId>value</artifactId>
       <version>2.9.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-    <groupId>com.github.cchacin</groupId>
-      <artifactId>immutables-jsonb</artifactId>
-      <version>0.1.0-RC1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
