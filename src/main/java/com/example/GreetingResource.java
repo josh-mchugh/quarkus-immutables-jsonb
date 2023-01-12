@@ -6,13 +6,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Path("/hello")
 public class GreetingResource {
-
-    Logger LOGGER = LoggerFactory.getLogger(GreetingResource.class);
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
