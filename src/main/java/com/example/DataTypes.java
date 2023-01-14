@@ -40,56 +40,56 @@ public abstract class DataTypes {
     public interface Basic {
 
         @JsonbProperty("string")
-        public abstract String getString();
+        public String getString();
 
         @JsonbProperty("character")
-        public abstract Character getCharacter();
+        public Character getCharacter();
 
         @JsonbProperty("byte")
-        public abstract Byte getByte();
+        public Byte getByte();
 
         @JsonbProperty("short")
-        public abstract Short getShort();
+        public Short getShort();
 
         @JsonbProperty("integer")
-        public abstract Integer getInteger();
+        public Integer getInteger();
 
         @JsonbProperty("long")
-        public abstract Long getLong();
+        public Long getLong();
 
         @JsonbProperty("float")
-        public abstract Float getFloat();
+        public Float getFloat();
 
         @JsonbProperty("double")
-        public abstract Double getDouble();
+        public Double getDouble();
 
         @JsonbProperty("boolean")
-        public abstract Boolean isBoolean();
+        public Boolean isBoolean();
 
         @JsonbProperty("date")
-        public abstract LocalDate getDate();
+        public LocalDate getDate();
 
         @JsonbProperty("dateTime")
-        public abstract LocalDateTime getDateTime();
+        public LocalDateTime getDateTime();
 
         @JsonbProperty("type")
-        public abstract TYPE getType(); 
+        public TYPE getType(); 
     }
 
     @Value.Immutable
     public interface Specific {
 
         @JsonbProperty("bigInteger")
-        public abstract BigInteger getBigInteger();
+        public BigInteger getBigInteger();
 
         @JsonbProperty("bigDecimal")
-        public abstract BigDecimal getBigDecimal();
+        public BigDecimal getBigDecimal();
 
         @JsonbProperty("uri")
-        public abstract URI getUri();
+        public URI getUri();
 
         @JsonbProperty("url")
-        public abstract URL getUrl();
+        public URL getUrl();
     }
 
     @Value.Immutable
@@ -112,9 +112,9 @@ public abstract class DataTypes {
     public interface Item {
 
         @JsonbProperty("property")
-        public abstract String getProperty();
+        public String getProperty();
 
         @JsonbProperty("value")
-        public abstract String getValue();
+        public String getValue();
     }
 }
