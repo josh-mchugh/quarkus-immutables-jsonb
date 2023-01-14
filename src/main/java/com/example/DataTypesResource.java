@@ -7,7 +7,14 @@ import java.net.URI;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
@@ -46,8 +53,6 @@ public class DataTypesResource {
             .getFloat(0.999F)
             .getDouble(0.999D)
             .isBoolean(Boolean.TRUE)
-            .date(LocalDate.parse("2023-01-12", DateTimeFormatter.ISO_DATE))
-            .dateTime(LocalDateTime.parse("2023-01-12T12:00:00", DateTimeFormatter.ISO_DATE_TIME))
             .type(DataTypes.TYPE.TYPE_1)
             .build();
 
@@ -65,10 +70,23 @@ public class DataTypesResource {
             .optionalDouble(OptionalDouble.of(.999D))
             .build();
 
+        LocalDateTime localDateTime = LocalDateTime.parse("2023-01-14T12:00:00", DateTimeFormatter.ISO_DATE_TIME);
+        Date date = Date.from(localDateTime.atZone(ZoneOffset.systemDefault()).toInstant());
+        Calendar calendar = GregorianCalendar.from(ZonedDateTime.of(localDateTime, ZoneId.systemDefault()));
+    
+        ImmutableDates dates = ImmutableDates.builder()
+                .date(date)
+                .calendar(calendar)
+                .localTime(LocalTime.from(localDateTime))
+                .localDate(LocalDate.from(localDateTime))
+                .localDateTime(localDateTime)
+                .build();
+
         DataTypes dataTypes = ImmutableDataTypes.builder()
             .basic(basic)
             .specific(specific)
             .optionals(optionals)
+            .dates(dates)
             .addList(firstItem, secondItem)
             .build();
 

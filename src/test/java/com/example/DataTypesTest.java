@@ -7,7 +7,14 @@ import java.net.URI;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
@@ -23,7 +30,7 @@ public class DataTypesTest {
     @Test
     public void whenDataTypeBasicThenExpectJSON() {
 
-        String expected = "{\"boolean\":false,\"byte\":1,\"character\":\"A\",\"date\":\"2023-01-12\",\"dateTime\":\"2023-01-12T12:00:00\",\"double\":0.9999,\"float\":0.999,\"integer\":1337,\"long\":999,\"short\":1,\"string\":\"String - Test\",\"type\":\"TYPE_2\"}";
+        String expected = "{\"boolean\":false,\"byte\":1,\"character\":\"A\",\"double\":0.9999,\"float\":0.999,\"integer\":1337,\"long\":999,\"short\":1,\"string\":\"String - Test\",\"type\":\"TYPE_2\"}";
 
         DataTypes.Basic basic = createBasic();
 
@@ -58,7 +65,16 @@ public class DataTypesTest {
         DataTypes.Optionals optionals = createEmptyOptions();
 
         Assertions.assertEquals(expected, JsonbBuilder.create().toJson(optionals));
+    }
 
+    @Test
+    public void whenDataTypeDatesThenExpectJSON() {
+
+        String expected = "{\"calendar\":\"2023-01-14T12:00:00-05:00[America/New_York]\",\"date\":\"2023-01-14T17:00:00Z[UTC]\",\"localDate\":\"2023-01-14\",\"localDateTime\":\"2023-01-14T12:00:00\",\"localTime\":\"12:00:00\"}";
+
+        DataTypes.Dates dates = createDates();
+
+        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(dates));
     }
 
     @Test
@@ -74,12 +90,13 @@ public class DataTypesTest {
     @Test
     public void whenDataTypesExpectJSON() throws MalformedURLException {
 
-        String expected = "{\"basic\":{\"boolean\":false,\"byte\":1,\"character\":\"A\",\"date\":\"2023-01-12\",\"dateTime\":\"2023-01-12T12:00:00\",\"double\":0.9999,\"float\":0.999,\"integer\":1337,\"long\":999,\"short\":1,\"string\":\"String - Test\",\"type\":\"TYPE_2\"},\"list\":[{\"property\":\"Property - Test\",\"value\":\"Value - Test\"}],\"optionals\":{\"optional\":\"Hello, Optional\",\"optionalDouble\":0.999,\"optionalInt\":1337,\"optionalLong\":999},\"specific\":{\"bigDecimal\":0.999,\"bigInteger\":1337,\"uri\":\"http://www.quarkus.io\",\"url\":\"http://www.quarkus.io\"}}";
-        
+        String expected = "{\"basic\":{\"boolean\":false,\"byte\":1,\"character\":\"A\",\"double\":0.9999,\"float\":0.999,\"integer\":1337,\"long\":999,\"short\":1,\"string\":\"String - Test\",\"type\":\"TYPE_2\"},\"dates\":{\"calendar\":\"2023-01-14T12:00:00-05:00[America/New_York]\",\"date\":\"2023-01-14T17:00:00Z[UTC]\",\"localDate\":\"2023-01-14\",\"localDateTime\":\"2023-01-14T12:00:00\",\"localTime\":\"12:00:00\"},\"list\":[{\"property\":\"Property - Test\",\"value\":\"Value - Test\"}],\"optionals\":{\"optional\":\"Hello, Optional\",\"optionalDouble\":0.999,\"optionalInt\":1337,\"optionalLong\":999},\"specific\":{\"bigDecimal\":0.999,\"bigInteger\":1337,\"uri\":\"http://www.quarkus.io\",\"url\":\"http://www.quarkus.io\"}}";
+
         DataTypes dataTypes = ImmutableDataTypes.builder()
             .basic(createBasic())
             .specific(createSpecific())
             .optionals(createOptionals())
+            .dates(createDates())
             .addList(createItem())
             .build();
 
@@ -98,13 +115,11 @@ public class DataTypesTest {
             .getFloat(0.999F)
             .getDouble(0.9999D)
             .isBoolean(Boolean.FALSE)
-            .date(LocalDate.parse("2023-01-12", DateTimeFormatter.ISO_DATE))
-            .dateTime(LocalDateTime.parse("2023-01-12T12:00:00", DateTimeFormatter.ISO_DATE_TIME))
             .type(DataTypes.TYPE.TYPE_2)
             .build();
     }
 
-    public DataTypes.Specific createSpecific() throws MalformedURLException {
+    private DataTypes.Specific createSpecific() throws MalformedURLException {
 
         return ImmutableSpecific.builder()
             .bigInteger(new BigInteger("1337"))
@@ -114,7 +129,7 @@ public class DataTypesTest {
             .build();
     }
 
-    public DataTypes.Optionals createOptionals() {
+    private DataTypes.Optionals createOptionals() {
 
         return ImmutableOptionals.builder()
             .optional(Optional.of("Hello, Optional"))
@@ -124,13 +139,28 @@ public class DataTypesTest {
             .build();
     }
 
-    public DataTypes.Optionals createEmptyOptions() {
+    private DataTypes.Optionals createEmptyOptions() {
 
         return ImmutableOptionals.builder()
             .optional(Optional.empty())
             .optionalInt(OptionalInt.empty())
             .optionalLong(OptionalLong.empty())
             .optionalDouble(OptionalDouble.empty())
+            .build();
+    }
+
+    private DataTypes.Dates createDates() {
+
+        LocalDateTime localDateTime = LocalDateTime.parse("2023-01-14T12:00:00", DateTimeFormatter.ISO_DATE_TIME);
+        Date date = Date.from(localDateTime.atZone(ZoneOffset.systemDefault()).toInstant());
+        Calendar calendar = GregorianCalendar.from(ZonedDateTime.of(localDateTime, ZoneId.systemDefault()));
+
+        return ImmutableDates.builder()
+            .date(date)
+            .calendar(calendar)
+            .localTime(LocalTime.from(localDateTime))
+            .localDate(LocalDate.from(localDateTime))
+            .localDateTime(localDateTime)
             .build();
     }
 

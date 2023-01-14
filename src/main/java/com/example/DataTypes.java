@@ -6,6 +6,9 @@ import java.net.URI;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
@@ -32,6 +35,9 @@ public abstract class DataTypes {
 
     @JsonbProperty("optionals")
     public abstract Optionals getOptionals();
+
+    @JsonbProperty("dates")
+    public abstract Dates getDates();
 
     @JsonbProperty("list")
     public abstract List<Item> getList();
@@ -65,12 +71,6 @@ public abstract class DataTypes {
 
         @JsonbProperty("boolean")
         public Boolean isBoolean();
-
-        @JsonbProperty("date")
-        public LocalDate getDate();
-
-        @JsonbProperty("dateTime")
-        public LocalDateTime getDateTime();
 
         @JsonbProperty("type")
         public TYPE getType(); 
@@ -106,6 +106,25 @@ public abstract class DataTypes {
         
         @JsonbProperty("optionalDouble")
         public OptionalDouble getOptionalDouble();
+    }
+
+    @Value.Immutable
+    public interface Dates {
+
+        @JsonbProperty("date")
+        public Date getDate();
+
+        @JsonbProperty("calendar")
+        public Calendar getCalendar();
+
+        @JsonbProperty("localTime")
+        public LocalTime getLocalTime();
+
+        @JsonbProperty("localDate")
+        public LocalDate getLocalDate();
+
+        @JsonbProperty("localDateTime")
+        public LocalDateTime getLocalDateTime();
     }
 
     @Value.Immutable
