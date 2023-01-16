@@ -21,7 +21,7 @@ public class DataTypesResource {
             .optionals(DataTypesFactory.createOptionals())
             .dates(DataTypesFactory.createDates())
             .enumeration(DataTypesFactory.createEnumerations())
-            .addList(DataTypesFactory.createItem())
+            .collections(DataTypesFactory.createCollections())
             .build();
 
         return Response.ok(dataTypes).build();

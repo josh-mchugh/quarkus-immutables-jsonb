@@ -1,0 +1,12 @@
+
+{
+    "listValues": [
+        "List Value - 1"
+    ],
+    "mapValues": {
+        "Key1": "Value - 1"
+    },
+    "setValues": [
+        "Set Value - 1"
+    ]
+}

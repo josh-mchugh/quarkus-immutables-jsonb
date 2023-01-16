@@ -83,13 +83,23 @@ public class DataTypesTest {
     }
 
     @Test
-    public void whenDataTypesItemThenExpectJSON() throws IOException {
+    public void whenDataTypesCollectionsThenExpectJSON() throws IOException {
 
-        String expected = new JsonFileUtils().getJsonFromFile("data-types-item.json");
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-collections.json");
 
-        DataTypes.Item item = DataTypesFactory.createItem();
+        DataTypes.Collections collections = DataTypesFactory.createCollections();
 
-        Assertions.assertEquals(expected, jsonb.toJson(item));
+        Assertions.assertEquals(expected, jsonb.toJson(collections));
+    }
+
+    @Test
+    public void whenDataTypesCollectionsEmptyThenExpectJSON() throws IOException {
+
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-collections-empty.json");
+
+        DataTypes.Collections collections = DataTypesFactory.createCollectionsEmpty();
+
+        Assertions.assertEquals(expected, jsonb.toJson(collections));
     }
 
     @Test
@@ -103,7 +113,7 @@ public class DataTypesTest {
             .optionals(DataTypesFactory.createOptionals())
             .dates(DataTypesFactory.createDates())
             .enumeration(DataTypesFactory.createEnumerations())
-            .addList(DataTypesFactory.createItem())
+            .collections(DataTypesFactory.createCollections())
             .build();
 
         Assertions.assertEquals(expected, jsonb.toJson(dataTypes));

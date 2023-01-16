@@ -15,10 +15,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
+import java.util.Set;
 
 import com.example.DataTypes.Enumeration.EnumType;
 
@@ -95,11 +98,21 @@ public class DataTypesFactory {
             .build();
     }
 
-    public static DataTypes.Item createItem() {
+    public static DataTypes.Collections createCollections() {
 
-        return ImmutableItem.builder()
-            .property("Property - Test")
-            .value("Value - Test")
+        return ImmutableCollections.builder()
+            .listValues(List.of("List Value - 1"))
+            .setValues(Set.of("Set Value - 1"))
+            .mapValues(Map.of("Key1", "Value - 1"))
+            .build();
+    }
+
+    public static DataTypes.Collections createCollectionsEmpty() {
+
+        return ImmutableCollections.builder()
+            .listValues(List.of())
+            .setValues(Set.of())
+            .mapValues(Map.of())
             .build();
     }
 }

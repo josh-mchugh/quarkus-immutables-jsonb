@@ -10,10 +10,12 @@ import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
+import java.util.Set;
 
 import javax.json.bind.annotation.JsonbProperty;
 
@@ -37,8 +39,8 @@ public abstract class DataTypes {
     @JsonbProperty("enumeration")
     public abstract Enumeration getEnumeration();
 
-    @JsonbProperty("list")
-    public abstract List<Item> getList();
+    @JsonbProperty("collections")
+    public abstract Collections getCollections();
 
     @Value.Immutable
     public interface Basic {
@@ -135,12 +137,15 @@ public abstract class DataTypes {
     }
 
     @Value.Immutable
-    public interface Item {
+    public interface Collections {
 
-        @JsonbProperty("property")
-        public String getProperty();
+        @JsonbProperty("listValues")
+        public List<String> getListValues();
 
-        @JsonbProperty("value")
-        public String getValue();
+        @JsonbProperty("setValues")
+        public Set<String> getSetValues();
+
+        @JsonbProperty("mapValues")
+        public Map<String, String> getMapValues();
     }
 }

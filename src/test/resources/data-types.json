@@ -11,6 +11,17 @@
         "short": 1,
         "string": "String - Test"
     },
+    "collections": {
+        "listValues": [
+            "List Value - 1"
+        ],
+        "mapValues": {
+            "Key1": "Value - 1"
+        },
+        "setValues": [
+            "Set Value - 1"
+        ]
+    },
     "dates": {
         "calendar": "2023-01-14T12:00:00-05:00[America/New_York]",
         "date": "2023-01-14T17:00:00Z[UTC]",
@@ -21,12 +32,6 @@
     "enumeration": {
         "enumType": "TYPE_1"
     },
-    "list": [
-        {
-            "property": "Property - Test",
-            "value": "Value - Test"
-        }
-    ],
     "optionals": {
         "optional": "Hello, Optional",
         "optionalDouble": 0.999,

@@ -1,11 +1,13 @@
 package com.example;
 
+
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.hasKey;
 
 import javax.ws.rs.core.Response;
 
@@ -41,8 +43,12 @@ public class DataTypesResourceTest {
                 .body("dates.localDate", is("2023-01-14"))
                 .body("dates.localDateTime", is("2023-01-14T12:00:00"))
                 .body("enumeration.enumType", is("TYPE_1"))
-                .body("list.size()", is(1))
-                .body("list[0].property", is("Property - Test"))
-                .body("list[0].value", is("Value - Test"));
+                .body("collections.listValues.size()", is(1))
+                .body("collections.listValues[0]", is("List Value - 1"))
+                .body("collections.setValues.size()", is(1))
+                .body("collections.setValues[0]", is("Set Value - 1"))
+                .body("collections.mapValues.size()", is(1))
+                .body("collections.mapValues", hasKey("Key1"))
+                .body("collections.mapValues.Key1", is("Value - 1"));
     }
 }
