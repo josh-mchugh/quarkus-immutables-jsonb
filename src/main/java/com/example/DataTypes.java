@@ -22,11 +22,6 @@ import org.immutables.value.Value;
 @Value.Immutable
 public abstract class DataTypes {
 
-    public static enum TYPE {
-        TYPE_1,
-        TYPE_2
-    }
-
     @JsonbProperty("basic")
     public abstract Basic getBasic();
 
@@ -38,6 +33,9 @@ public abstract class DataTypes {
 
     @JsonbProperty("dates")
     public abstract Dates getDates();
+
+    @JsonbProperty("enumeration")
+    public abstract Enumeration getEnumeration();
 
     @JsonbProperty("list")
     public abstract List<Item> getList();
@@ -71,9 +69,6 @@ public abstract class DataTypes {
 
         @JsonbProperty("boolean")
         public Boolean isBoolean();
-
-        @JsonbProperty("type")
-        public TYPE getType(); 
     }
 
     @Value.Immutable
@@ -125,6 +120,18 @@ public abstract class DataTypes {
 
         @JsonbProperty("localDateTime")
         public LocalDateTime getLocalDateTime();
+    }
+
+    @Value.Immutable
+    public interface Enumeration {
+
+        public static enum EnumType {
+            TYPE_1,
+            TYPE_2
+        }
+
+        @JsonbProperty("enumType") 
+        public EnumType getEnumType();
     }
 
     @Value.Immutable

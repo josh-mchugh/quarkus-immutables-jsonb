@@ -26,6 +26,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.example.DataTypes.Enumeration.EnumType;
+
 @Path("/data-types")
 @Produces(MediaType.APPLICATION_JSON)
 public class DataTypesResource {
@@ -53,7 +55,6 @@ public class DataTypesResource {
             .getFloat(0.999F)
             .getDouble(0.999D)
             .isBoolean(Boolean.TRUE)
-            .type(DataTypes.TYPE.TYPE_1)
             .build();
 
         DataTypes.Specific specific = ImmutableSpecific.builder()
@@ -82,11 +83,16 @@ public class DataTypesResource {
                 .localDateTime(localDateTime)
                 .build();
 
+        ImmutableEnumeration enumeration = ImmutableEnumeration.builder()
+            .enumType(EnumType.TYPE_1)
+            .build();
+
         DataTypes dataTypes = ImmutableDataTypes.builder()
             .basic(basic)
             .specific(specific)
             .optionals(optionals)
             .dates(dates)
+            .enumeration(enumeration)
             .addList(firstItem, secondItem)
             .build();
 
