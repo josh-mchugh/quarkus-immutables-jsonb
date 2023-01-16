@@ -1,0 +1,12 @@
+
+{
+    "boolean": false,
+    "byte": 1,
+    "character": "A",
+    "double": 0.9999,
+    "float": 0.999,
+    "integer": 1337,
+    "long": 999,
+    "short": 1,
+    "string": "String - Test"
+}

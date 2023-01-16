@@ -1,0 +1,7 @@
+
+{
+    "optional": "Hello, Optional",
+    "optionalDouble": 0.999,
+    "optionalInt": 1337,
+    "optionalLong": 999
+}

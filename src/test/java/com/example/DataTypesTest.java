@@ -1,48 +1,61 @@
 package com.example;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
 
+import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
+import javax.json.bind.JsonbConfig;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataTypesTest {
     
-    @Test
-    public void whenDataTypeBasicThenExpectJSON() {
+    JsonbConfig config;
+    Jsonb jsonb;
 
-        String expected = "{\"boolean\":false,\"byte\":1,\"character\":\"A\",\"double\":0.9999,\"float\":0.999,\"integer\":1337,\"long\":999,\"short\":1,\"string\":\"String - Test\"}";
+    @BeforeEach
+    public void setup() {
 
-        DataTypes.Basic basic = DataTypesFactory.createBasic();
-
-        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(basic));
+        config = new JsonbConfig().withFormatting(true);
+        jsonb = JsonbBuilder.create(config);
     }
 
     @Test
-    public void whenDataTypeSpecificThenExpectJSON() throws MalformedURLException {
+    public void whenDataTypeBasicThenExpectJSON() throws IOException {
 
-        String expected = "{\"bigDecimal\":0.999,\"bigInteger\":1337,\"uri\":\"http://www.quarkus.io\",\"url\":\"http://www.quarkus.io\"}";
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-basic.json");
+
+        DataTypes.Basic basic = DataTypesFactory.createBasic();        
+
+        Assertions.assertEquals(expected, jsonb.toJson(basic));
+    }
+
+    @Test
+    public void whenDataTypeSpecificThenExpectJSON() throws IOException {
+
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-specific.json");
 
         DataTypes.Specific specific = DataTypesFactory.createSpecific();
 
-        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(specific));
+        Assertions.assertEquals(expected, jsonb.toJson(specific));
     }
 
     @Test
-    public void whenDataTypeOptionalsThenExpectJSON() {
+    public void whenDataTypeOptionalsThenExpectJSON() throws IOException {
 
-        String expected = "{\"optional\":\"Hello, Optional\",\"optionalDouble\":0.999,\"optionalInt\":1337,\"optionalLong\":999}";
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-optionals.json");
 
         DataTypes.Optionals optionals = DataTypesFactory.createOptionals();
 
-        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(optionals));
+        Assertions.assertEquals(expected, jsonb.toJson(optionals));
     }
 
     @Test
-    public void whenDataTypeEmptyOptionalsThenExpectJSON() {
+    public void whenDataTypeOptionalsEmptyThenExpectJSON() throws IOException {
 
-        String expected = "{}";
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-optionals-empty.json");
 
         DataTypes.Optionals optionals = DataTypesFactory.createEmptyOptions();
 
@@ -50,39 +63,39 @@ public class DataTypesTest {
     }
 
     @Test
-    public void whenDataTypeDatesThenExpectJSON() {
+    public void whenDataTypeDatesThenExpectJSON() throws IOException {
 
-        String expected = "{\"calendar\":\"2023-01-14T12:00:00-05:00[America/New_York]\",\"date\":\"2023-01-14T17:00:00Z[UTC]\",\"localDate\":\"2023-01-14\",\"localDateTime\":\"2023-01-14T12:00:00\",\"localTime\":\"12:00:00\"}";
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-dates.json");
 
         DataTypes.Dates dates = DataTypesFactory.createDates();
 
-        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(dates));
+        Assertions.assertEquals(expected, jsonb.toJson(dates));
     }
 
     @Test
-    public void whenDataTypesEnumerationsThenExpectJSON() {
+    public void whenDataTypesEnumerationsThenExpectJSON() throws IOException {
 
-        String expected = "{\"enumType\":\"TYPE_1\"}";
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-enumerations.json");
 
         DataTypes.Enumeration enumeration = DataTypesFactory.createEnumerations();
 
-        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(enumeration));
+        Assertions.assertEquals(expected, jsonb.toJson(enumeration));
     }
 
     @Test
-    public void whenDataTypesItemThenExpectJSON() {
+    public void whenDataTypesItemThenExpectJSON() throws IOException {
 
-        String expected = "{\"property\":\"Property - Test\",\"value\":\"Value - Test\"}";
+        String expected = new JsonFileUtils().getJsonFromFile("data-types-item.json");
 
         DataTypes.Item item = DataTypesFactory.createItem();
 
-        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(item));
+        Assertions.assertEquals(expected, jsonb.toJson(item));
     }
 
     @Test
-    public void whenDataTypesExpectJSON() throws MalformedURLException {
+    public void whenDataTypesExpectJSON() throws IOException {
 
-        String expected = "{\"basic\":{\"boolean\":false,\"byte\":1,\"character\":\"A\",\"double\":0.9999,\"float\":0.999,\"integer\":1337,\"long\":999,\"short\":1,\"string\":\"String - Test\"},\"dates\":{\"calendar\":\"2023-01-14T12:00:00-05:00[America/New_York]\",\"date\":\"2023-01-14T17:00:00Z[UTC]\",\"localDate\":\"2023-01-14\",\"localDateTime\":\"2023-01-14T12:00:00\",\"localTime\":\"12:00:00\"},\"enumeration\":{\"enumType\":\"TYPE_1\"},\"list\":[{\"property\":\"Property - Test\",\"value\":\"Value - Test\"}],\"optionals\":{\"optional\":\"Hello, Optional\",\"optionalDouble\":0.999,\"optionalInt\":1337,\"optionalLong\":999},\"specific\":{\"bigDecimal\":0.999,\"bigInteger\":1337,\"uri\":\"http://www.quarkus.io\",\"url\":\"http://www.quarkus.io\"}}";
+        String expected = new JsonFileUtils().getJsonFromFile("data-types.json");
 
         DataTypes dataTypes = ImmutableDataTypes.builder()
             .basic(DataTypesFactory.createBasic())
@@ -93,6 +106,6 @@ public class DataTypesTest {
             .addList(DataTypesFactory.createItem())
             .build();
 
-        Assertions.assertEquals(expected, JsonbBuilder.create().toJson(dataTypes));
+        Assertions.assertEquals(expected, jsonb.toJson(dataTypes));
     }
 }

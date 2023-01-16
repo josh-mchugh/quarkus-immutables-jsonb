@@ -1,0 +1,42 @@
+
+{
+    "basic": {
+        "boolean": false,
+        "byte": 1,
+        "character": "A",
+        "double": 0.9999,
+        "float": 0.999,
+        "integer": 1337,
+        "long": 999,
+        "short": 1,
+        "string": "String - Test"
+    },
+    "dates": {
+        "calendar": "2023-01-14T12:00:00-05:00[America/New_York]",
+        "date": "2023-01-14T17:00:00Z[UTC]",
+        "localDate": "2023-01-14",
+        "localDateTime": "2023-01-14T12:00:00",
+        "localTime": "12:00:00"
+    },
+    "enumeration": {
+        "enumType": "TYPE_1"
+    },
+    "list": [
+        {
+            "property": "Property - Test",
+            "value": "Value - Test"
+        }
+    ],
+    "optionals": {
+        "optional": "Hello, Optional",
+        "optionalDouble": 0.999,
+        "optionalInt": 1337,
+        "optionalLong": 999
+    },
+    "specific": {
+        "bigDecimal": 0.999,
+        "bigInteger": 1337,
+        "uri": "http://www.quarkus.io",
+        "url": "http://www.quarkus.io"
+    }
+}
