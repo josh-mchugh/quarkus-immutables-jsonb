@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.example.util.JsonFileUtils;
+
 public class DataTypesTest {
     
     JsonbConfig config;
