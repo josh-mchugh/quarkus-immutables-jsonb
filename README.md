@@ -1,5 +1,19 @@
 # quarkus-immutables-jsonb Project
 
+This is a simple project to test the compatibility of Jsonb and Immutables libraries. I recently was working on project [quarkus-restful-bagel-app](https://github.com/josh-mchugh/quarkus-restful-bagel-app) and ran into some issues with Jsonb and Immutables.
+
+I did some seraching and stumbled across very little implementation between the two libraries. 
+
+Github Issue 
+https://github.com/immutables/immutables/issues/708
+
+Stackoverflow
+https://github.com/immutables/immutables/issues/708
+
+Jsonb Powerpoint
+https://de.slideshare.net/DmitryKornilov/jsonb-introduction-and-comparison-with-other-frameworks
+
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
