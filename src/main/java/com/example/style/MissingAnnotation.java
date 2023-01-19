@@ -1,4 +1,4 @@
-package com.example;
+package com.example.style;
 
 import org.immutables.value.Value;
 

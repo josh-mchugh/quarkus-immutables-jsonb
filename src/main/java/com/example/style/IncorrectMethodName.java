@@ -1,4 +1,4 @@
-package com.example;
+package com.example.style;
 
 import javax.json.bind.annotation.JsonbProperty;
 

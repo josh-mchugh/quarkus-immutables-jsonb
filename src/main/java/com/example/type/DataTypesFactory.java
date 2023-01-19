@@ -1,4 +1,4 @@
-package com.example;
+package com.example.type;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -23,7 +23,7 @@ import java.util.OptionalInt;
 import java.util.OptionalLong;
 import java.util.Set;
 
-import com.example.DataTypes.Enumeration.EnumType;
+import com.example.type.DataTypes.Enumeration.EnumType;
 
 public class DataTypesFactory {
 
