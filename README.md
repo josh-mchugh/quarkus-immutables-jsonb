@@ -266,9 +266,11 @@ Output JSON
 }
 ```
 
-## Future Test Project
+## Additional Test Project
 
-A future project worth testing would be to verify if Jsonb + Immutables + Quarkus run in a native build. I did not get around to testing this as it was not part of my original experiment and would add additional time.
+Testing Jsonb & Immutables with Quarkus native builds. [Git Project](https://github.com/josh-mchugh/quarkus-jsonb-immutables-native)
+
+This was not part of the original experiment and has been set up in a separate project. 
 
 ## Summary
 
