@@ -78,9 +78,10 @@ public class DataTypesFactory {
 
     public static DataTypes.Dates createDates() {
 
+        ZoneId utcZone = ZoneId.of("Etc/UTC");
         LocalDateTime localDateTime = LocalDateTime.parse("2023-01-14T12:00:00", DateTimeFormatter.ISO_DATE_TIME);
-        Date date = Date.from(localDateTime.atZone(ZoneOffset.systemDefault()).toInstant());
-        Calendar calendar = GregorianCalendar.from(ZonedDateTime.of(localDateTime, ZoneId.systemDefault()));
+        Date date = Date.from(localDateTime.atZone(utcZone).toInstant());
+        Calendar calendar = GregorianCalendar.from(ZonedDateTime.of(localDateTime, utcZone));
 
         return ImmutableDates.builder()
             .date(date)
