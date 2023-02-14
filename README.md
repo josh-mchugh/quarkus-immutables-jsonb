@@ -242,7 +242,7 @@ Output JSON
         ]
     },
     "dates": {
-        "calendar": "2023-01-14T12:00:00-05:00[America/New_York]",
+        "calendar": "2023-01-14T12:00:00Z[Etc/UTC]",
         "date": "2023-01-14T17:00:00Z[UTC]",
         "localDate": "2023-01-14",
         "localDateTime": "2023-01-14T12:00:00",

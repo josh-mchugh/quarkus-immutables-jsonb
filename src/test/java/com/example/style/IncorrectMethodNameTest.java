@@ -5,8 +5,6 @@ import javax.json.bind.JsonbBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.example.ImmutableIncorrectMethodName;
-
 public class IncorrectMethodNameTest {
     
     @Test
