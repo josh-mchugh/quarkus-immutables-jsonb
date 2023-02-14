@@ -1,3 +1,6 @@
+![build](https://github.com/josh-mchugh/quarkus-immutables-jsonb/actions/workflows/main.yml/badge.svg)
+[![codecov](https://codecov.io/gh/josh-mchugh/quarkus-immutables-jsonb/branch/main/graph/badge.svg?token=M17A08R7RT)](https://codecov.io/gh/josh-mchugh/quarkus-immutables-jsonb)
+
 # Quarkus + Immutables + Jsonb Project
 
 This is a simple project to test the compatibility of Jsonb and Immutables libraries. I recently encountered some issues within my project [quarkus-restful-bagel-app](https://github.com/josh-mchugh/quarkus-restful-bagel-app) when using Jsonb and Immutables.
@@ -243,7 +246,7 @@ Output JSON
     },
     "dates": {
         "calendar": "2023-01-14T12:00:00Z[Etc/UTC]",
-        "date": "2023-01-14T17:00:00Z[UTC]",
+        "date": "2023-01-14T12:00:00Z[UTC]",
         "localDate": "2023-01-14",
         "localDateTime": "2023-01-14T12:00:00",
         "localTime": "12:00:00"
